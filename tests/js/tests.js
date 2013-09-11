@@ -1,7 +1,80 @@
 $(document).ready(function(){
+/************************** REQUIRED TEST BLOCK START******************************/
+	var cleanPenceOut = function(totalPence){
+		var cleanPence = totalPence.replace(/[£]/g, "").replace(/[p]/g, "");
+		
+		if(cleanPence.indexOf('.') != -1){
+			cleanPence = parseFloat(cleanPence);
+			cleanPence = cleanPence.toFixed(2);
+			cleanPence = cleanPence.replace(/[.]/g, "");
+		}
+		if(totalPence.indexOf('£') != -1 && totalPence.indexOf('.') === -1){
+			cleanPence = cleanPence*100;
+		};
+		return parseInt(cleanPence);
+	}
+	
+	test( "input = 4", function() {
+	  ok( cleanPenceOut("4") === 4, "returns 4" );
+	});
+	
+	test( "input = 85", function() {
+	  ok( cleanPenceOut("85") === 85, "returns 85" );
+	});
+	
+	test( "input = 197p", function() {
+	  ok( cleanPenceOut("197p") === 197, "returns 197" );
+	});
+	
+	test( "input = 2p", function() {
+	  ok( cleanPenceOut("2p") === 2, "returns 2" );
+	});
+	
+	test( "input = 1.87", function() {
+	  ok( cleanPenceOut("1.87") === 187, "returns 187" );
+	});
+	
+	test( "input = £1.23", function() {
+	  ok( cleanPenceOut("£1.23") === 123, "returns 123" );
+	});
+	
+	test( "input = £2", function() {
+	  ok( cleanPenceOut("£2") === 200, "returns 200" );
+	});
+	
+	test( "input = £10", function() {
+	  ok( cleanPenceOut("£10") === 1000, "returns 1000" );
+	});
+	
+	test( "input = £1.87p", function() {
+	  ok( cleanPenceOut("£1.87p") === 187, "returns 187" );
+	});
+	
+	test( "input = £1p", function() {
+	  ok( cleanPenceOut("£1p") === 100, "returns 100" );
+	});
+	
+	test( "input = £1.p", function() {
+	  ok( cleanPenceOut("£1.p") === 100, "returns 100" );
+	});
+	
+	test( "input = 001.41p", function() {
+	  ok( cleanPenceOut("001.41p") === 141, "returns 141" );
+	});
+	
+	test( "input = 4.235p", function() {
+	  ok( cleanPenceOut("4.235p") === 424, "returns 424" );
+	});
+	
+	test( "input = £1.257422457p", function() {
+	  ok( cleanPenceOut("£1.257422457p") === 126, "returns 126" );
+	});
+/************************** REQUIRED TEST BLOCK START******************************/
+
+/************************** MY TESTS START******************************/
 /************************** STRIP POUND SIGN TEST BLOCK START******************************/
-	test( "Testing stripping pound sign", function() {
-	  ok( "£200".replace(/[£]/g, "") == "200", "Passed!" );
+	test( "Testing stripping pound sign and 'p'", function() {
+	  ok( "£200.00p".replace(/[£]/g, "").replace(/[p]/g, "") == "200.00", "Passed!" );
 	});
 /************************** STRIP POUND SIGN TEST BLOCK START******************************/
 

@@ -1,4 +1,5 @@
 $(document).ready(function(){
+	var isFlatPound = false;
 	/*Basic validation function to:
 	1) Ensure submitted value is not empty
 	2) Ensure a valid numeric value is entered
@@ -35,11 +36,13 @@ $(document).ready(function(){
 		  	oneP: {display: "1p", value: 1}
 		};
 		
-		//Series of assignments to clean the value entered for simpler calculation
-		if(totalPence.indexOf('.') != -1){
-			totalPence = parseFloat(totalPence);
-			totalPence = totalPence.toFixed(2);
-			totalPence = totalPence.replace(/[.]/g, "");
+		//Series of assignments to clean the value entered for simpler calculation, only if it has a decimal place
+		if(isFlatPound == false){
+			if(totalPence.indexOf('.') != -1){
+				totalPence = parseFloat(totalPence);
+				totalPence = totalPence.toFixed(2);
+				totalPence = totalPence.replace(/[.]/g, "");
+			}
 		}
 		
 		//Itterate through the denominations and compare values against the entered amount
@@ -59,7 +62,13 @@ $(document).ready(function(){
 	//Detect form entry and kick off validation
 	$('#btnCalcPenc').click(function(){
 		$('#resultCanvas ul').empty();
-		var totalP = $('#txtPence').val().replace(/[£]/g, "");
+		//Strip unwanted bits
+		var totalP = $('#txtPence').val().replace(/[£]/g, "").replace(/[p]/g, "");
+		//detect if a flat pound value has been entered
+		if($('#txtPence').val().indexOf('£') != -1 && $('#txtPence').val().indexOf('.') === -1){
+			totalP = totalP*100;
+			isFlatPound = true;
+		};
 		validate(totalP);
 	});
 	
