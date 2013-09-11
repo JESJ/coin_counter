@@ -1,14 +1,19 @@
 <!DOCTYPE html>
-<html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>Coin calculator test</title>
+<link rel="stylesheet" href="css/main.css">
 </head>
 <body>
 	<div class="main_container">
-    	<label for="txtPence">Please enter the amount pennies you would like to calculate:</label>
-    	<input type="text" id="txtPence">
-        <button id="btnCalcPenc">Calculate</button>
+    	<h1>The Coin Calculator</h1>
+        <p>Welcome to the coin calculator. This is a simple applicaton that accepts a given number of pennies, and will in turn output the minimum number of Sterling coins needed to make that amount.</p>
+    	<label for="txtPence">Please enter the amount of pennies you would like to calculate below:</label><br>
+    	<input type="text" id="txtPence"><br>
+        <button id="btnCalcPenc" class="grey_btn">Calculate</button>
+        <div id="resultCanvas"><ul></ul></div>
+        <div id="errorCanvas"></div>
     </div>
 </body>
 <script src="js/libs/jquery-1.10.2.min.js" type="text/javascript"></script>
