@@ -36,10 +36,11 @@ $(document).ready(function(){
 		};
 		
 		//Series of assignments to clean the value entered for simpler calculation
-		totalPence = totalPence.replace(/[.]/g, "");
-		totalPence = parseFloat(totalPence);
-		totalPence = totalPence.toFixed(2);
-		
+		if(totalPence.indexOf('.') != -1){
+			totalPence = parseFloat(totalPence);
+			totalPence = totalPence.toFixed(2);
+			totalPence = totalPence.replace(/[.]/g, "");
+		}
 		
 		//Itterate through the denominations and compare values against the entered amount
 		//Take the remainder and re-assign to pence value. 
